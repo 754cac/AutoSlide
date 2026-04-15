@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" Version="8.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\PowerPointSharing\Models\InkStrokeData.cs" Link="Source\InkStrokeData.cs" />
+    <Compile Include="..\PowerPointSharing\Stores\SlideStateStore.cs" Link="Source\SlideStateStore.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\DeckIndex.cs" Link="Source\DeckIndex.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\DeckIndexBuilder.cs" Link="Source\DeckIndexBuilder.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\IntervalSet.cs" Link="Source\IntervalSet.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\InkStateRepository.cs" Link="Source\InkStateRepository.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\SessionState.cs" Link="Source\SessionState.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\SessionReducer.cs" Link="Source\SessionReducer.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\ViewerUrlBuilder.cs" Link="Source\ViewerUrlBuilder.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Runtime\LateJoinerInkStateBuilder.cs" Link="Source\LateJoinerInkStateBuilder.cs" />
+    <Compile Include="..\PowerPointSharing\Services\Networking\PresentationApiGateway.cs" Link="Source\PresentationApiGateway.cs" />
+  </ItemGroup>
+</Project>

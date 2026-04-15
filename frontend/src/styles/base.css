@@ -1,0 +1,30 @@
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Aptos", "Segoe UI", "Helvetica Neue", sans-serif;
+  overflow: hidden; /* App handles scrolling */
+  overscroll-behavior: none;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+.app-container.dark-theme {
+  background: #111614;
+  color: #e5ece5;
+}
+

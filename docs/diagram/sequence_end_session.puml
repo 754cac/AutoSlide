@@ -1,0 +1,47 @@
+@startuml
+' Caption: End-session flow showing archival, replay availability, and on-demand summary request.
+title End Session, Replay, and On-Demand Summary
+
+actor Instructor
+actor Student
+participant SessionManager
+participant LiveSessionController
+participant PresentationHub
+database PostgreSQL
+participant "File Storage" as Storage
+participant "External LLM API" as LLM
+participant "LiveSessionViewer / ReplayViewer" as Viewer
+participant "On-Demand Summary Service" as SummaryService
+
+Instructor -> SessionManager : EndSession()
+SessionManager -> LiveSessionController : POST /api/sessions/end
+LiveSessionController -> PostgreSQL : set SessionStatus=Ended,\nEndedAt, AllowStudentDownload=true,\nclear Course.ActiveSessionId
+LiveSessionController -> Storage : upload transcript archive JSON
+LiveSessionController -> PresentationHub : SessionEnded
+PresentationHub -> Viewer : SessionEnded
+
+Student -> Viewer : open replay / session history
+Viewer -> LiveSessionController : GET /api/sessions/{sessionId}/replay
+LiveSessionController --> Viewer : transcript + optional cached summary + download links
+
+opt summary request from replay or session history
+	Student -> Viewer : RequestSummary(sessionId)
+	Viewer -> LiveSessionController : POST /api/sessions/{sessionId}/summary
+	LiveSessionController -> PostgreSQL : check cached SummaryText
+	alt cached summary exists
+		PostgreSQL --> LiveSessionController : SummaryText
+		LiveSessionController --> Viewer : cached summary
+	else no cached summary
+		LiveSessionController -> SummaryService : GenerateSummary(sessionId)
+		SummaryService -> Storage : load transcript archive
+		SummaryService -> LLM : GenerateLectureSummaryAsync(fullTranscript)
+		LLM --> SummaryService : summaryText
+		SummaryService -> PostgreSQL : persist SummaryText
+		SummaryService -> Storage : update summary artifact
+		SummaryService --> LiveSessionController : summaryText
+		LiveSessionController --> Viewer : generated summary
+		SummaryService -> PresentationHub : summary_update
+		PresentationHub -> Viewer : summary_update
+	end
+end
+@enduml

@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "append_css",
+			"type": "shell",
+			"command": "echo \"/* Pulse Animation for Live Button */\n@keyframes pulse {\n  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }\n  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }\n  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }\n}\n\n.pulse-animation {\n  animation: pulse 2s infinite;\n}\" >> \"c:\\Users\\steve\\OneDrive - The Hong Kong Polytechnic University\\Sem 3\\FYP\\FYP\\frontend\\src\\styles.css\"",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

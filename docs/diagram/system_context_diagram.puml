@@ -1,0 +1,27 @@
+@startuml
+' Caption: High-level context showing how instructors and students interact with AutoSlide and which external systems it depends on.
+title AutoSlide System Context
+
+left to right direction
+skinparam componentStyle rectangle
+
+actor Instructor
+actor Student
+actor "Institutional LMS / Admin\n(optional)" as LMS
+
+component "PowerPoint + VSTO Add-in" as Addin
+component "AutoSlide Backend" as Backend
+component "AutoSlide Web Portal / Viewer" as Web
+database "PostgreSQL" as DB
+component "File Storage\n(Supabase / uploads)" as Storage
+cloud "External LLM API" as LLM
+
+Instructor --> Addin : create / run live session
+Addin --> Backend : upload PPTX, ink, transcript\nstart / end / slide updates
+Backend --> DB : persist users, courses,\nsessions, materials
+Backend --> Storage : store PPTX, PDFs,\ntranscripts, summaries
+Backend --> LLM : on-demand summary request\nfrom replay / history
+Student --> Web : join live session,\nview replay, download materials
+Web --> Backend : HTTPS + SignalR +\nsummary request
+LMS ..> Backend : course / roster provisioning
+@enduml

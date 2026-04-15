@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./backend
+    env_file:
+      - .env
+    ports:
+      - "5001:5001"
+      - "5000:5000"
+    volumes:
+      - dataprotection_keys:/root/.aspnet/DataProtection-Keys
+    environment:
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
+      - VIEWER_BASE_URL=http://localhost:3000
+      - ConnectionStrings__DefaultConnection=${SUPABASE_DB_CONNECTION}
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - JwtSettings__Key=${JWT_KEY}
+      - JwtSettings__Issuer=AutoSlideBackend
+      - JwtSettings__Audience=AutoSlideUsers
+      - JwtSettings__DurationInMinutes=1440
+  viewer:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  dataprotection_keys:

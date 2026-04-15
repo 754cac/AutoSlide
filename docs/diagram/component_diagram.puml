@@ -1,0 +1,66 @@
+@startuml
+' Caption: Logical architecture showing the add-in, backend services, web clients, and infrastructure used by AutoSlide.
+title AutoSlide Logical Architecture
+
+left to right direction
+skinparam componentStyle rectangle
+
+package "PowerPoint VSTO Add-in" {
+  component "SessionManager" as AddinSession
+  component "InkOverlayService" as AddinInk
+  component "SpeechService" as AddinSpeech
+  component "PresentationApiGateway" as AddinApi
+  component "SignalRService" as AddinSignalR
+}
+
+package "AutoSlide Backend" {
+  component "UploadService" as UploadSvc
+  component "LiveSessionController" as LiveCtl
+  component "SessionsController" as SessionsCtl
+  component "PresentationHub" as Hub
+  component "PresentationStore" as Store
+  component "On-Demand Summary Service" as SummaryService
+  component "OpenRouterChatService" as LLMClient
+  component "AppDbContext" as DbContext
+}
+
+package "AutoSlide Web Portal" {
+  component "LiveSessionViewer" as LiveViewer
+  component "StudentCourseView" as CourseView
+  component "ReplayViewer" as ReplayViewer
+}
+
+database "PostgreSQL" as PostgreSQL
+component "File Storage\n(Supabase / uploads)" as Storage
+cloud "External LLM API" as LLM
+
+AddinSession --> AddinApi : HTTP upload / start / end
+AddinSession --> AddinInk : capture ink
+AddinSession --> AddinSpeech : transcript text
+AddinInk --> AddinSignalR : broadcast ink
+AddinSignalR --> Hub : SignalR hub calls
+
+AddinApi --> UploadSvc : POST /api/upload
+AddinApi --> LiveCtl : /api/sessions/*
+AddinApi --> SessionsCtl : session metadata / downloads
+
+UploadSvc --> DbContext : create session,\nupdate course
+LiveCtl --> DbContext : update slide,\nend session
+SessionsCtl --> DbContext : read / update session data
+DbContext --> PostgreSQL : EF Core
+
+UploadSvc --> Storage : PPTX / PDF pages
+LiveCtl --> Hub : SlideUnlocked,\ntranscriptreceived,\nSessionEnded
+SessionsCtl --> Storage : signed URLs / transcripts / summaries
+SessionsCtl --> DbContext : read cached SummaryText
+SessionsCtl --> SummaryService : GenerateSummary(sessionId)\nwhen cached summary missing
+SummaryService --> LLMClient : summary generation\non demand
+LLMClient --> LLM : external chat completions
+SummaryService --> DbContext : persist SummaryText\nif generated
+SummaryService --> Storage : persist summary archive
+
+Hub --> LiveViewer : live updates
+Hub --> ReplayViewer : replay updates
+Hub --> CourseView : course/session notices
+ReplayViewer --> SessionsCtl : RequestSummary(sessionId)
+@enduml

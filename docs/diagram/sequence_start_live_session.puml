@@ -1,0 +1,42 @@
+@startuml
+' Caption: Start-session flow from add-in upload through live viewer join and initial sync.
+title Start Live Session and Student Joins
+
+actor Instructor
+actor Student
+participant SessionManager
+participant InkOverlayService
+participant SpeechService
+participant "Windows Runtime\nSpeechRecognizer" as SpeechRecognizer
+participant PresentationApiGateway
+participant UploadService
+participant SlideSplitterService
+participant PostgreSQL
+participant "File Storage" as Storage
+participant PresentationHub
+participant "LiveSessionViewer" as Viewer
+
+Instructor -> SessionManager : StartSession(courseId, authToken)
+SessionManager -> PresentationApiGateway : UploadPresentationAndRegisterAsync(...)
+PresentationApiGateway -> UploadService : POST /api/upload
+UploadService -> PostgreSQL : create Session\nupdate Course.ActiveSessionId
+UploadService -> SlideSplitterService : UploadPptxAndSplitPdf()
+SlideSplitterService -> Storage : upload PPTX,\nfull PDF, per-page PDFs
+UploadService --> PresentationApiGateway : presentationId,\npresenterToken, sessionId, viewerUrl
+PresentationApiGateway --> SessionManager : registration details
+
+SessionManager -> InkOverlayService : AttachToWindow()
+SessionManager -> SpeechService : Start()
+SpeechService -> SpeechRecognizer : listen / recognize speech
+
+SessionManager -> PresentationHub : JoinAsPresenter(sessionId)
+PresentationHub --> SessionManager : presenter group joined
+PresentationHub -> PresentationHub : broadcast SessionStarted\nfor course group
+
+Student -> Viewer : open viewer URL
+Viewer -> UploadService : GET /api/info/session/{sessionId}
+UploadService --> Viewer : pdf, status, downloadUrl
+
+Viewer -> PresentationHub : JoinSession(sessionId)
+PresentationHub --> Viewer : SyncState{currentSlide,\nunlockedSlides,totalSlides}
+@enduml

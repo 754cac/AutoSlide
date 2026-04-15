@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ModernSpeech/ModernSpeech.csproj" Id="12345678-1234-1234-1234-1234567890AB" />
+  <Project Path="PowerPointSharing/PowerPointSharing.csproj" Id="dd3844c8-12de-41f9-be1b-23152ac0822d" />
+  <Project Path="PowerPointSharing.Runtime.Tests/PowerPointSharing.Runtime.Tests.csproj" Id="2f9a042d-2f4f-4b94-a2f2-b1831fc5f6f4" />
+</Solution>

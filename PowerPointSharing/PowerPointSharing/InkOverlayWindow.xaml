@@ -1,0 +1,116 @@
+<Window x:Class="PowerPointSharing.InkOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ink Overlay" 
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="Transparent"
+        Topmost="True"
+        ShowInTaskbar="False"
+        ShowActivated="False"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        IsHitTestVisible="True">
+    <Grid>
+        <Border x:Name="blankSolutionMask"
+                Background="White"
+                Visibility="Collapsed"
+                IsHitTestVisible="False"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="0"
+                Height="0" />
+
+        <InkCanvas x:Name="inkCanvas" 
+                   Background="Transparent"
+                   EditingMode="None"
+                   IsHitTestVisible="False">
+            <InkCanvas.DefaultDrawingAttributes>
+                <DrawingAttributes Color="Red" Width="3" Height="3" StylusTip="Ellipse" />
+            </InkCanvas.DefaultDrawingAttributes>
+        </InkCanvas>
+        
+        <StackPanel Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Top" 
+                    Margin="0,20,20,0"
+                    Background="#DD333333"
+                    IsHitTestVisible="True">
+            
+            <Button x:Name="btnToggle" Content="🖊️ Draw" 
+                    Click="BtnToggle_Click" 
+                    Width="90" Height="40" Margin="5"
+                    Background="#FF2196F3" Foreground="White" FontWeight="Bold" FontSize="14"
+                    ToolTip="Toggle between Draw Mode and Click-Through Mode" />
+            
+            <Button x:Name="btnEraser" Content="🧹 Eraser" 
+                    Click="BtnEraser_Click" 
+                    Width="80" Height="40" Margin="5"
+                    Background="#FFFFC107" Foreground="Black" FontWeight="Bold"
+                    ToolTip="Erase strokes" />
+            
+            <Button x:Name="btnClear" Content="🗑️ Clear" 
+                    Click="BtnClear_Click" 
+                    Width="75" Height="40" Margin="5"
+                    Background="#FFF44336" Foreground="White" FontWeight="Bold"
+                    ToolTip="Clear all ink" />
+
+            <Button x:Name="btnBlankSolution" Content="Blank Solution"
+                    Click="BtnBlankSolution_Click"
+                    Width="120" Height="40" Margin="5"
+                    Background="#FF7C3AED" Foreground="White" FontWeight="Bold"
+                    ToolTip="Create a blank white solution page" />
+
+            <Button x:Name="btnCurrentSlideSolution" Content="Slide Solution"
+                    Click="BtnCurrentSlideSolution_Click"
+                    Width="120" Height="40" Margin="5"
+                    Background="#FF0EA5A4" Foreground="White" FontWeight="Bold"
+                    ToolTip="Create a solution page from current slide background" />
+
+            <Button x:Name="btnSaveSolution" Content="Save Solution"
+                    Click="BtnSaveSolution_Click"
+                    Width="120" Height="40" Margin="5"
+                    Background="#FF166534" Foreground="White" FontWeight="Bold"
+                    Visibility="Collapsed"
+                    ToolTip="Save current solution draft" />
+
+            <Button x:Name="btnDiscardSolution" Content="Discard Draft"
+                    Click="BtnDiscardSolution_Click"
+                    Width="120" Height="40" Margin="5"
+                    Background="#FFB91C1C" Foreground="White" FontWeight="Bold"
+                    Visibility="Collapsed"
+                    ToolTip="Discard current solution draft" />
+            
+            <ComboBox x:Name="cmbColor" Width="80" Height="40" Margin="5"
+                      SelectionChanged="CmbColor_SelectionChanged"
+                      ToolTip="Pen color" VerticalContentAlignment="Center">
+                <ComboBoxItem Content="Red" IsSelected="True" Tag="Red" />
+                <ComboBoxItem Content="Blue" Tag="Blue" />
+                <ComboBoxItem Content="Green" Tag="Green" />
+                <ComboBoxItem Content="Yellow" Tag="Yellow" />
+                <ComboBoxItem Content="Black" Tag="Black" />
+                <ComboBoxItem Content="White" Tag="White" />
+            </ComboBox>
+            
+            <Slider x:Name="sliderWidth" Width="100" Height="40" Margin="5"
+                    Minimum="1" Maximum="20" Value="3"
+                    ValueChanged="SliderWidth_ValueChanged"
+                    ToolTip="Pen width"
+                    VerticalAlignment="Center" />
+        </StackPanel>
+        
+        <Border x:Name="modeIndicator"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" 
+                Margin="20,0,0,20"
+                Background="#AA000000"
+                CornerRadius="5"
+                Padding="10,5"
+                IsHitTestVisible="False">
+            <TextBlock x:Name="txtModeStatus"
+                       Foreground="#AAFFFFFF"
+                       FontSize="14"
+                       Text="🖱️ Click Mode - Clicks pass to PowerPoint" />
+        </Border>
+    </Grid>
+</Window>

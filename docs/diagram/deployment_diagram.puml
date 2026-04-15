@@ -1,0 +1,39 @@
+@startuml
+' Caption: Deployment view showing where the instructor client, student browser, backend services, database, storage, and external AI run.
+title AutoSlide Deployment Diagram
+
+skinparam componentStyle rectangle
+
+node "Instructor PC" as InstructorPC {
+  artifact "PowerPoint" as PPT
+  artifact "VSTO Add-in\n(SessionManager, InkOverlayService,\nSpeechService)" as AddinArtifact
+}
+
+node "Student Device" as StudentDevice {
+  artifact "Web Browser" as Browser
+}
+
+node "Application Server" as AppServer {
+  artifact "ASP.NET Core Backend" as BackendArtifact
+  artifact "SignalR Hub" as HubArtifact
+  artifact "On-Demand Summary Service" as WorkerArtifact
+}
+
+database "PostgreSQL Server" as DbServer {
+  artifact "PostgreSQL" as PostgresArtifact
+}
+
+node "File Storage" as StorageNode {
+  artifact "Supabase buckets / uploads" as StorageArtifact
+}
+
+cloud "External LLM API" as AIService
+
+AddinArtifact --> BackendArtifact : HTTPS
+Browser --> BackendArtifact : HTTPS
+Browser --> HubArtifact : SignalR WebSocket
+BackendArtifact --> PostgresArtifact : EF Core / SQL
+BackendArtifact --> StorageArtifact : files / signed URLs
+WorkerArtifact --> AIService : on-demand summarisation requests
+HubArtifact --> Browser : live updates
+@enduml

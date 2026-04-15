@@ -1,0 +1,18 @@
+/* Structured stylesheet entrypoint: keep import order aligned with previous cascade. */
+@import './styles/tokens.css';
+@import './styles/base.css';
+@import './styles/utilities.css';
+@import './styles/components/viewer-toolbar.css';
+@import './styles/components/layout-shell.css';
+@import './styles/components/slide-rail.css';
+@import './styles/components/viewer-stage.css';
+@import './styles/components/panels.css';
+@import './styles/components/responsive.css';
+@import './styles/components/annotation-tools.css';
+@import './styles/components/modal.css';
+@import './styles/pages/portal.css';
+@import './styles/pages/dashboard.css';
+@import './styles/pages/viewer.css';
+@import './styles/components/share-modal.css';
+@import './styles/components/interaction-states.css';
+@import './styles/components/workspace.css';

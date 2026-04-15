@@ -1,0 +1,197 @@
+/* --- Viewer Interaction Utilities --- */
+.viewer-control {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.viewer-control:focus-visible {
+  outline: 2px solid var(--viewer-accent-border);
+  outline-offset: 2px;
+}
+
+.viewer-shell .icon-btn.viewer-control--icon,
+.viewer-modal-card__close.viewer-control--icon,
+.share-session-modal__close.viewer-control--icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--viewer-line);
+  background: var(--viewer-surface-raised);
+  color: var(--viewer-text-muted);
+  box-shadow: none;
+}
+
+.viewer-shell .icon-btn.viewer-control--icon:hover:not(:disabled),
+.viewer-modal-card__close.viewer-control--icon:hover:not(:disabled),
+.share-session-modal__close.viewer-control--icon:hover:not(:disabled) {
+  background: var(--viewer-surface-strong);
+  border-color: var(--viewer-accent-border);
+  color: var(--viewer-accent-strong);
+  transform: none;
+}
+
+.viewer-shell .icon-btn.viewer-control--icon:disabled,
+.viewer-modal-card__close.viewer-control--icon:disabled,
+.share-session-modal__close.viewer-control--icon:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  background: var(--viewer-surface-strong);
+  border-color: var(--viewer-line);
+  color: var(--viewer-disabled);
+}
+
+.viewer-shell .content-panel__copy-btn.viewer-control--neutral,
+.share-session-modal__copy-btn.viewer-control--neutral {
+  border: 1px solid var(--viewer-line);
+  background: var(--viewer-surface-strong);
+  color: var(--viewer-accent-strong);
+  box-shadow: none;
+}
+
+.viewer-shell .content-panel__copy-btn.viewer-control--neutral:hover:not(:disabled),
+.share-session-modal__copy-btn.viewer-control--neutral:hover:not(:disabled) {
+  background: var(--viewer-surface-raised);
+  border-color: var(--viewer-accent-border);
+  color: var(--viewer-text);
+  transform: none;
+}
+
+.viewer-shell .content-panel__copy-btn.viewer-control--neutral:disabled,
+.share-session-modal__copy-btn.viewer-control--neutral:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  background: var(--viewer-surface-strong);
+  border-color: var(--viewer-line);
+  color: var(--viewer-disabled);
+}
+
+.viewer-shell .action-btn.viewer-control--primary,
+.viewer-shell .content-panel__summary-button.viewer-control--primary,
+.share-session-modal__copy-btn.viewer-control--primary {
+  border: 1px solid var(--viewer-accent);
+  background: var(--viewer-accent);
+  color: #fffdfc;
+  box-shadow: none;
+}
+
+.viewer-shell .action-btn.viewer-control--primary:hover:not(:disabled),
+.viewer-shell .content-panel__summary-button.viewer-control--primary:hover:not(:disabled),
+.share-session-modal__copy-btn.viewer-control--primary:hover:not(:disabled) {
+  background: var(--viewer-accent-strong);
+  border-color: var(--viewer-accent-strong);
+  color: #fffdfc;
+  transform: none;
+}
+
+.viewer-shell .action-btn.viewer-control--primary:disabled,
+.viewer-shell .content-panel__summary-button.viewer-control--primary:disabled,
+.share-session-modal__copy-btn.viewer-control--primary:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  background: var(--viewer-surface-strong);
+  border-color: var(--viewer-line);
+  color: var(--viewer-disabled);
+}
+
+.viewer-shell .thumbnail-tab-btn.viewer-control--tab,
+.viewer-shell .content-panel__tab.viewer-control--tab {
+  background: transparent;
+  color: var(--viewer-text-muted);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.viewer-shell .thumbnail-tab-btn.viewer-control--tab:hover:not(:disabled):not(.active),
+.viewer-shell .content-panel__tab.viewer-control--tab:hover:not(:disabled):not(.active) {
+  background: var(--viewer-surface-strong);
+  color: var(--viewer-text);
+  border-bottom-color: var(--viewer-accent-border);
+}
+
+.viewer-shell .thumbnail-tab-btn.viewer-control--tab.active,
+.viewer-shell .content-panel__tab.viewer-control--tab.active {
+  background: var(--viewer-accent-soft);
+  color: var(--viewer-accent-strong);
+  border-color: transparent;
+  border-bottom-color: var(--viewer-accent);
+  box-shadow: inset 0 -2px 0 var(--viewer-accent);
+}
+
+.viewer-shell .thumbnail-tab-btn.viewer-control--tab:disabled,
+.viewer-shell .content-panel__tab.viewer-control--tab:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  background: transparent;
+  color: var(--viewer-disabled);
+  box-shadow: none;
+}
+
+.viewer-shell .content-panel__download-row.viewer-control--row {
+  background: var(--viewer-surface-raised);
+  border-color: var(--viewer-line);
+  color: var(--viewer-text);
+  box-shadow: none;
+}
+
+.viewer-shell .content-panel__download-row.viewer-control--row:hover:not(:disabled) {
+  background: var(--viewer-surface-strong);
+  border-color: var(--viewer-accent-border);
+  color: var(--viewer-text);
+  transform: none;
+}
+
+.viewer-shell .content-panel__download-row.viewer-control--row:hover:not(:disabled) .content-panel__download-icon,
+.viewer-shell .content-panel__download-row.viewer-control--row:hover:not(:disabled) .content-panel__download-chevron {
+  color: var(--viewer-accent-strong);
+}
+
+.viewer-shell .content-panel__download-row.viewer-control--row:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+  background: var(--viewer-surface-raised);
+  border-color: var(--viewer-line);
+  color: var(--viewer-disabled);
+  transform: none;
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card:hover:not(.active):not(.locked) {
+  background: var(--viewer-surface-strong);
+  box-shadow: inset 0 0 0 1px var(--viewer-accent-border);
+  transform: none;
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card:hover:not(.active):not(.locked) .thumbnail-preview {
+  border-color: var(--viewer-accent-border);
+  background: var(--viewer-surface-raised);
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card:hover:not(.active):not(.locked) .thumbnail-label {
+  color: var(--viewer-text);
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card.active {
+  background: var(--viewer-accent-soft);
+  box-shadow: inset 0 0 0 1px var(--viewer-accent-border);
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card.active .thumbnail-preview {
+  border-color: var(--viewer-accent-border);
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card.active .thumbnail-label {
+  color: var(--viewer-accent-strong);
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card.locked {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.viewer-shell .thumbnail-item.viewer-control--card.locked:hover {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}

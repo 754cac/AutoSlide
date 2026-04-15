@@ -1,0 +1,8 @@
+bin/
+obj/
+.git/
+.vscode/
+*.user
+*.suo
+Dockerfile
+BackendServer.Tests/

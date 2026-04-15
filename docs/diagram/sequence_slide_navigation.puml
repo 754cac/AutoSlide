@@ -1,0 +1,33 @@
+@startuml
+' Caption: Live teaching flow showing slide advancement, ink broadcast, and real-time transcript delivery.
+title Live Slide Navigation with Transcription and Ink
+
+actor Instructor
+participant SessionManager
+participant InkOverlayService
+participant SignalRService
+participant "Windows Runtime\nSpeechRecognizer" as SpeechRecognizer
+participant SpeechService
+participant LiveSessionController
+participant PresentationHub
+participant Viewer as "LiveSessionViewer"
+database PostgreSQL
+
+Instructor -> SessionManager : advance slide / annotate slide
+SessionManager -> LiveSessionController : POST /api/sessions/{id}/slide\n{slide, unlock}
+LiveSessionController -> PostgreSQL : update CurrentSlideIndex\ninsert SessionUnlockedSlide if unlocked
+LiveSessionController -> PresentationHub : SlideUnlocked
+PresentationHub -> Viewer : SlideUnlocked
+
+Instructor -> InkOverlayService : complete stroke
+InkOverlayService -> SignalRService : BroadcastInkStroke(sessionId,\nslideIndex, strokeData)
+SignalRService -> PresentationHub : BroadcastInkStroke(...)
+PresentationHub -> Viewer : InkStroke
+
+SpeechRecognizer -> SpeechService : recognized text
+SpeechService -> SessionManager : TranscriptReceived(text)
+SessionManager -> LiveSessionController : POST /api/transcript\n{presentationId, text}
+LiveSessionController -> PostgreSQL : AppendTranscript / store transcript
+LiveSessionController -> PresentationHub : transcriptreceived / transcript
+PresentationHub -> Viewer : transcriptreceived
+@enduml

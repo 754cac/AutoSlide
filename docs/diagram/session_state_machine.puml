@@ -1,0 +1,25 @@
+@startuml
+' Caption: Session lifecycle based on SessionStatus, with optional cached summary availability.
+title Session State Machine
+
+[*] --> Created : create session
+Created --> Active : StartSession
+Active --> Ended : EndSession
+Active --> Ended : timeout / forced stop
+Ended --> Archived : archive transcript\n+ artifacts
+Archived --> SummaryAvailable : RequestSummary\n(cache summary)
+state Archived
+state SummaryAvailable
+SummaryAvailable --> [*]
+Archived --> [*]
+
+note right of Archived
+  Derived from persisted transcript and replay artefacts.
+  Summary generation is optional and cached on demand.
+end note
+
+note right of SummaryAvailable
+  Optional derived state that indicates a cached summary exists.
+  The DB enum remains SessionStatus.Ended.
+end note
+@enduml

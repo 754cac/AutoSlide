@@ -1,0 +1,14 @@
+bin/
+obj/
+.git/
+.vscode/
+*.user
+*.suo
+Dockerfile
+docker-compose.yml
+README.md
+frontend/
+vsto-addin/
+PowerPointSharing/
+docs/
+uploads/

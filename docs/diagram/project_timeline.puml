@@ -1,0 +1,56 @@
+@startgantt
+printscale weekly
+Print between 2025-08-30 and 2026-07-10
+Project starts 2025-09-01
+
+-- Planning & Initiation --
+[Project Kickoff] starts 2025-09-01 and lasts 3 days
+[Stakeholder Identification] starts after [Project Kickoff]'s end and lasts 4 days
+[High-level Scope Definition] starts after [Stakeholder Identification]'s end and lasts 5 days
+[Feasibility and Risk Assessment] starts after [High-level Scope Definition]'s end and lasts 5 days
+[Project Plan and Schedule] starts after [Feasibility and Risk Assessment]'s end and lasts 5 days
+[Planning Complete] happens at [Project Plan and Schedule]'s end
+
+-- Requirements --
+[Requirements Workshops] starts after [Planning Complete]'s end and lasts 10 days
+[Use Cases and User Stories] starts after [Requirements Workshops]'s end and lasts 10 days
+[Draft SRS] starts after [Use Cases and User Stories]'s end and lasts 10 days
+[Requirements Review] starts after [Draft SRS]'s end and lasts 4 days
+[Requirements Baseline] happens at [Requirements Review]'s end
+
+-- Design --
+[High-level Architecture] starts after [Requirements Baseline]'s end and lasts 10 days
+[Database and API Design] starts after [High-level Architecture]'s end and lasts 10 days
+[UI and UX Wireframes] starts after [High-level Architecture]'s end and lasts 10 days
+[Detailed Design Spec] starts after [Database and API Design]'s end and lasts 10 days
+[Design Review] starts after [Detailed Design Spec]'s end and lasts 4 days
+[Design Sign-off] happens at [Design Review]'s end
+
+-- Implementation --
+[Dev Environment and CI Setup] starts after [Design Sign-off]'s end and lasts 5 days
+[Core Backend Development] starts after [Dev Environment and CI Setup]'s end and lasts 20 days
+[Core Frontend Development] starts after [Dev Environment and CI Setup]'s end and lasts 20 days
+[Integration Development] starts after [Core Backend Development]'s end and lasts 15 days
+[Code Review and Refactor] starts after [Integration Development]'s end and lasts 10 days
+[Code Freeze] happens at [Code Review and Refactor]'s end
+
+-- Testing --
+[Unit and Integration Testing] starts after [Code Freeze]'s end and lasts 15 days
+[System and Regression Testing] starts after [Unit and Integration Testing]'s end and lasts 15 days
+[Performance and Security Testing] starts after [System and Regression Testing]'s end and lasts 10 days
+[User Acceptance Testing] starts after [Performance and Security Testing]'s end and lasts 10 days
+[Test Sign-off] happens at [User Acceptance Testing]'s end
+
+-- Pilot Release Preparation --
+[Release Planning and Runbook] starts after [Test Sign-off]'s end and lasts 5 days
+[Pilot Validation] starts after [Release Planning and Runbook]'s end and lasts 5 days
+[Packaging and Controlled Handoff] starts after [Pilot Validation]'s end and lasts 4 days
+[Pilot Release Ready] happens at [Packaging and Controlled Handoff]'s end
+
+-- Post-Submission Stabilization --
+[First Patch Release] happens on 14 days after [Pilot Release Ready]'s end
+[Follow-up Fixes Iteration 1] starts after [Pilot Release Ready]'s end and lasts 15 days
+[Follow-up Fixes Iteration 2] starts after [Follow-up Fixes Iteration 1]'s end and lasts 15 days
+[Limited Maintenance Ongoing] starts after [Follow-up Fixes Iteration 2]'s end and lasts 40 days
+
+@endgantt

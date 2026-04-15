@@ -1,0 +1,102 @@
+@startuml
+' Caption: Persistent domain model used by AutoSlide's backend and EF Core migrations.
+title AutoSlide Domain Model
+
+hide circle
+skinparam classAttributeIconSize 0
+
+enum UserRole {
+  Teacher
+  Student
+}
+
+enum SessionStatus {
+  Created
+  Active
+  Ended
+}
+
+enum EnrollmentStatus {
+  Pending
+  Enrolled
+}
+
+class User {
+  +Id: Guid
+  +Email: string
+  +PasswordHash: string
+  +FullName: string
+  +Role: UserRole
+  +IsRegistered: bool
+  +CreatedAt: DateTime
+}
+
+class Course {
+  +Id: Guid
+  +Code: string
+  +Name: string
+  +Description: string?
+  +TeacherId: Guid
+  +ActiveSessionId: Guid?
+  +CreatedAt: DateTime
+}
+
+class Enrollment {
+  +Id: Guid
+  +CourseId: Guid
+  +StudentId: Guid
+  +Status: EnrollmentStatus
+  +EnrolledAt: DateTime
+}
+
+class Session {
+  +Id: Guid
+  +PresentationTitle: string
+  +SlideCount: int
+  +CourseId: Guid?
+  +PresenterToken: string
+  +Status: SessionStatus
+  +CreatedAt: DateTime
+  +StartedAt: DateTime?
+  +EndedAt: DateTime?
+  +CurrentSlideIndex: int
+  +TotalSlides: int
+  +AllowStudentDownload: bool
+  +DownloadAvailableAt: DateTime?
+  +TranscriptStoragePath: string?
+  +SummaryText: string?
+  +AnnotatedPptxStoragePath: string?
+}
+
+class Material {
+  +Id: Guid
+  +CourseId: Guid
+  +Title: string
+  +OriginalFileName: string
+  +StoragePath: string
+  +Week: int
+  +IsVisible: bool
+  +ReleaseAt: DateTime?
+  +UploadedAt: DateTime
+}
+
+class SessionUnlockedSlide {
+  +SessionId: Guid
+  +SlideIndex: int
+  +UnlockedAt: DateTime
+}
+
+User "1" -- "0..*" Course : teaches
+User "1" -- "0..*" Enrollment : student
+Course "1" -- "0..*" Enrollment
+Course "1" -- "0..*" Material
+Course "1" -- "0..*" Session
+Course "0..1" --> "1" Session : active session
+Session "1" -- "0..*" SessionUnlockedSlide
+
+note right of Session
+  Transcript and cached summary are stored as
+  path/text fields rather than separate tables.
+  SummaryText is populated on demand after a summary request.
+end note
+@enduml

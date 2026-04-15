@@ -1,0 +1,104 @@
+/* Design Tokens: shared workspace colors, spacing, radius, typography, focus, motion */
+:root {
+  --workspace-background: #f3efe8;
+  --workspace-background-alt: #f8f5ef;
+  --workspace-surface: #fffdfa;
+  --workspace-surface-muted: #f5efe7;
+  --workspace-surface-strong: #ece2d5;
+  --workspace-border: #d8cfc5;
+  --workspace-border-strong: #c8bdae;
+  --workspace-text: #1f1916;
+  --workspace-text-muted: #6b6258;
+  --workspace-accent: #6f2f3a;
+  --workspace-accent-strong: #54212a;
+  --workspace-accent-soft: rgba(111, 47, 58, 0.09);
+  --workspace-success: #355d45;
+  --workspace-warning: #7a5932;
+  --workspace-danger: #9f2b2b;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-pill: 999px;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+
+  --shadow-elevation-soft: 0 10px 24px rgba(31, 25, 22, 0.06);
+  --shadow-subtle: 0 1px 2px rgba(31, 25, 22, 0.03);
+
+  --focus-ring-color: rgba(111, 47, 58, 0.26);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+
+  --page-bg: var(--workspace-background);
+  --surface-bg: var(--workspace-surface);
+  --surface-muted: var(--workspace-surface-muted);
+  --surface-strong: var(--workspace-surface-strong);
+  --line-color: var(--workspace-border);
+  --text-main: var(--workspace-text);
+  --text-muted: var(--workspace-text-muted);
+  --accent: var(--workspace-accent);
+  --accent-strong: var(--workspace-accent-strong);
+  --accent-warm: var(--workspace-accent);
+  --shadow-soft: var(--shadow-elevation-soft);
+
+  --dash-bg: var(--workspace-background);
+  --dash-surface: var(--workspace-surface);
+  --dash-surface-soft: var(--workspace-surface-muted);
+  --dash-primary: var(--workspace-accent);
+  --dash-primary-strong: var(--workspace-accent-strong);
+  --dash-text: var(--workspace-text);
+  --dash-muted: var(--workspace-text-muted);
+  --dash-border: var(--workspace-border);
+  --dash-shadow: var(--shadow-elevation-soft);
+
+  --student-bg: var(--workspace-background);
+  --student-surface: var(--workspace-surface);
+  --student-surface-muted: var(--workspace-surface-muted);
+  --student-border: var(--workspace-border);
+  --student-text: var(--workspace-text);
+  --student-muted: var(--workspace-text-muted);
+  --student-primary: var(--workspace-accent);
+  --student-primary-strong: var(--workspace-accent-strong);
+  --student-live: var(--workspace-danger);
+  --student-upcoming: var(--workspace-warning);
+  --student-released: var(--workspace-success);
+  --student-locked: var(--workspace-text-muted);
+  --student-replay: #53405c;
+}
+
+.dark-theme {
+  --workspace-background: #0f1311;
+  --workspace-background-alt: #161b18;
+  --workspace-surface: #151b17;
+  --workspace-surface-muted: #1a211d;
+  --workspace-surface-strong: #212723;
+  --workspace-border: rgba(255, 255, 255, 0.09);
+  --workspace-border-strong: rgba(255, 255, 255, 0.14);
+  --workspace-text: #e5ece6;
+  --workspace-text-muted: #a3afa6;
+  --workspace-accent: #c66b78;
+  --workspace-accent-strong: #dc8390;
+  --workspace-accent-soft: rgba(198, 107, 120, 0.12);
+  --workspace-success: #76a07f;
+  --workspace-warning: #caa26b;
+  --workspace-danger: #ef9a9a;
+  --student-replay: #9c8ad8;
+}

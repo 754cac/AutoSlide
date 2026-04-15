@@ -1,0 +1,51 @@
+@startuml
+' Caption: Main instructor and student use cases in the AutoSlide workflow, with on-demand summary generation separated from session end.
+title AutoSlide Use Cases
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor Instructor
+actor Student
+actor "Institutional LMS / Admin\n(optional)" as LMS
+
+rectangle "AutoSlide System" {
+  usecase "Upload Presentation" as UC_Upload
+  usecase "Start Live Session" as UC_Start
+  usecase "Control Slides" as UC_Control
+  usecase "Annotate Slides" as UC_Annotate
+  usecase "End Session" as UC_End
+  usecase "Download Artifacts" as UC_DownloadArtifacts
+
+  usecase "Join Live Session" as UC_Join
+  usecase "View Live Slides\n& Transcript" as UC_ViewLive
+  usecase "Request Summary" as UC_RequestSummary
+  usecase "View AI Summary" as UC_ViewSummary
+  usecase "Replay Session" as UC_Replay
+  usecase "Download Materials" as UC_Materials
+
+  usecase "Manage Courses /\nRoster Import" as UC_Roster
+}
+
+Instructor --> UC_Upload
+Instructor --> UC_Start
+Instructor --> UC_Control
+Instructor --> UC_Annotate
+Instructor --> UC_End
+Instructor --> UC_DownloadArtifacts
+
+Student --> UC_Join
+Student --> UC_ViewLive
+Student --> UC_RequestSummary
+Student --> UC_ViewSummary
+Student --> UC_Replay
+Student --> UC_Materials
+
+LMS --> UC_Roster
+
+UC_Start ..> UC_Upload : <<include>>
+UC_Start ..> UC_Control : <<include>>
+UC_ViewSummary ..> UC_RequestSummary : <<include>>
+UC_Replay ..> UC_ViewSummary : <<extend>>
+UC_Join ..> UC_ViewLive : <<include>>
+@enduml

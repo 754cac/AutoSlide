@@ -1,0 +1,234 @@
+/* --- Viewer Modal --- */
+.viewer-modal-root {
+  --viewer-bg: #f6f2ed;
+  --viewer-surface: #fffdfc;
+  --viewer-surface-strong: #f3ede7;
+  --viewer-surface-raised: #fffdfc;
+  --viewer-line: rgba(148, 163, 184, 0.18);
+  --viewer-text: #1f1a17;
+  --viewer-text-muted: #6f675f;
+  --viewer-disabled: #a59b92;
+  --viewer-accent: #6f2f3a;
+  --viewer-accent-strong: #5b232d;
+  --viewer-accent-soft: rgba(111, 47, 58, 0.08);
+  --viewer-accent-border: rgba(111, 47, 58, 0.24);
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.viewer-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.viewer-modal-card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, var(--viewer-modal-max-width, 34rem));
+  max-height: calc(100vh - 2rem);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 32px 80px rgba(15, 23, 42, 0.35);
+}
+
+.viewer-modal-card--sm {
+  --viewer-modal-max-width: 34rem;
+}
+
+.viewer-modal-card--lg {
+  --viewer-modal-max-width: 48rem;
+}
+
+.viewer-modal-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.viewer-modal-card__heading {
+  min-width: 0;
+}
+
+.viewer-modal-card__title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.viewer-modal-card__close {
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.125rem 0.25rem;
+}
+
+.viewer-modal-card__close:hover {
+  color: #0f172a;
+}
+
+.viewer-modal-card__close:focus-visible,
+.viewer-share-modal__copy-btn:focus-visible,
+.viewer-share-modal__input:focus-visible {
+  outline: 2px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 2px;
+}
+
+.viewer-modal-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 0;
+  overflow: auto;
+  padding: 1rem 1.5rem 1.5rem;
+}
+
+.viewer-modal-intro {
+  margin: 0;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.viewer-summary-modal__content {
+  white-space: pre-wrap;
+  line-height: 1.65;
+  color: #334155;
+}
+
+.viewer-share-modal__qr-frame {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.viewer-share-modal__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.viewer-share-modal__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.viewer-share-modal__link-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.viewer-share-modal__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 0.85rem;
+  background: #f8fafc;
+  color: #0f172a;
+  font: inherit;
+}
+
+.viewer-share-modal__copy-btn {
+  flex: 0 0 auto;
+  min-width: 7rem;
+  border: none;
+  border-radius: 0.85rem;
+  background: #5f6d52;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 20px rgba(95, 109, 82, 0.18);
+}
+
+.viewer-share-modal__copy-btn:hover {
+  background: #4f5d49;
+  transform: translateY(-1px);
+}
+
+.viewer-share-modal__copy-btn[disabled] {
+  opacity: 0.65;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.dark-theme .viewer-modal-card {
+  background: #111827;
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+.dark-theme .viewer-modal-card__title,
+.dark-theme .viewer-modal-card__close,
+.dark-theme .viewer-modal-intro,
+.dark-theme .viewer-summary-modal__content,
+.dark-theme .viewer-share-modal__label {
+  color: #e2e8f0;
+}
+
+.dark-theme .viewer-modal-card__close:hover {
+  color: #fff;
+}
+
+.dark-theme .viewer-share-modal__input {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(148, 163, 184, 0.28);
+  color: #e2e8f0;
+}
+
+.dark-theme .viewer-share-modal__qr-frame {
+  background: #ffffff;
+}
+
+.dark-theme .viewer-share-modal__copy-btn {
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.28);
+}
+
+@media (max-width: 520px) {
+  .viewer-modal-root {
+    padding: 0.75rem;
+  }
+
+  .viewer-modal-card__header,
+  .viewer-modal-card__body {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .viewer-share-modal__link-row {
+    flex-direction: column;
+  }
+
+  .viewer-share-modal__copy-btn {
+    width: 100%;
+  }
+}
+
+
